@@ -1,0 +1,15 @@
+# Ignore Python-related files and directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+venv/
+env/
+env2/
+.env
+.DS_Store
+
+# Ignore model and cache directories
+transformers/
+cache/
