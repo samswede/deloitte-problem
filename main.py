@@ -7,7 +7,7 @@ def main():
     model = AutoModelForSpeechSeq2Seq.from_pretrained("openai/whisper-tiny.en")
 
     # Specify the path to your audio file
-    audio_path = "audio/EarningsCall.wav"
+    audio_path = "audio/Conference.wav"
 
     # Call the function to transcribe the audio
     predicted_text = transcribe_audio(audio_path, processor, model)
