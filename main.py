@@ -1,19 +1,24 @@
-from transformers import AutoProcessor, AutoModelForSpeechSeq2Seq
+from preprocess import preprocess_audio, convert_m4a_to_wav
 from transcription import transcribe_audio
 
+
 def main():
-    # Load the processor and model
-    processor = AutoProcessor.from_pretrained("openai/whisper-tiny.en") 
-    model = AutoModelForSpeechSeq2Seq.from_pretrained("openai/whisper-tiny.en")
+    file_name = "PureGym"
 
-    # Specify the path to your audio file
-    audio_path = "audio/Conference.wav"
+    #raw_audio_path = f"raw_audio/{file_name}.m4a"  # Path to your audio file
 
-    # Call the function to transcribe the audio
-    predicted_text = transcribe_audio(audio_path, processor, model)
+    # Convert m4a to wav
+    #audio_path = convert_m4a_to_wav(raw_audio_path, f"audio_wav/{file_name}.wav")
 
-    # Print or use the predicted text
-    print(predicted_text)
+    audio_path = f"audio_wav/{file_name}.wav"
+
+    # Preprocess the audio and get chunks
+    chunks, sample_rate = preprocess_audio(audio_path)
+
+    # Transcribe each chunk and concatenate the results
+    transcription = transcribe_audio(chunks, sample_rate)
+
+    print("Transcription:", transcription)
 
 if __name__ == "__main__":
     main()
